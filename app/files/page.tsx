@@ -53,3 +53,5 @@ export default function Files() {
     </div>
   );
 }
+
+export const dynamic = "force-dynamic";

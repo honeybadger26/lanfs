@@ -56,3 +56,5 @@ export default function Text() {
     </div>
   );
 }
+
+export const dynamic = "force-dynamic";
