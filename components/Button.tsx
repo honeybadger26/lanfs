@@ -35,6 +35,7 @@ export function Button({
     >
       {icon && (
         <Image
+          className="min-h-8 min-w-8"
           color="#fff"
           src={icon.src}
           alt={icon.alt}

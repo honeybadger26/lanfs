@@ -6,32 +6,30 @@ import { Row } from '@/components/Row';
 import { UploadFileButton } from '@/components/UploadFileButton';
 import fs from 'fs';
 import Link from 'next/link';
-import { ReactNode } from 'react';
+import { Cell } from './Cell';
 
-type CellProps = {
-  className?: string;
-  children: ReactNode;
-};
-
-// TODO: Duplicated
-function Cell({ className, children }: CellProps) {
-  return (
-    <td className={`border-2 p-2 whitespace-pre ${className}`}>{children}</td>
-  );
-}
-
-export default function Files() {
+export function FilesSection({ className = "" }: { className?: string }) {
   const files = fs.readdirSync("./tmp/files/");
 
   return (
-    <div className="flex flex-col items-center">
-      <h2 className="text-2xl font-semibold">Files</h2>
-      {files.length > 0 && (
-        <table className="mt-4">
-          <tbody>
+    <table className={`w-full ${className}`}>
+      <thead>
+        <tr>
+          <Cell colSpan={3} className="text-center text-3xl font-semibold">
+            Files
+          </Cell>
+        </tr>
+      </thead>
+      <tbody>
+        {files.length === 0 ? (
+          <tr>
+            <Cell>No files</Cell>
+          </tr>
+        ) : (
+          <>
             {files.map((fileName) => (
               <tr key={fileName}>
-                <Cell>{fileName}</Cell>
+                <Cell className="w-full text-ellipsis">{fileName}</Cell>
                 <Cell>
                   <DownloadFileButton fileName={fileName} />
                 </Cell>
@@ -40,17 +38,15 @@ export default function Files() {
                 </Cell>
               </tr>
             ))}
-          </tbody>
-        </table>
-      )}
-      <UploadFileButton className="pt-6" />
-      <Row className="mt-6">
-        <Link href="/">
-          <Button>Back</Button>
-        </Link>
-        {files.length > 0 && <DeleteAllButton type="files" />}
-      </Row>
-    </div>
+            <tr>
+              <Cell colSpan={3}>
+                <DeleteAllButton className="w-full" type="text" />
+              </Cell>
+            </tr>
+          </>
+        )}
+      </tbody>
+    </table>
   );
 }
 

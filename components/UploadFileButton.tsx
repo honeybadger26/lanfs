@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from 'react';
 import { Button } from './Button';
 
-export function UploadFileButton({ className }: { className?: string }) {
+export function UploadFileButton({ className = "" }: { className?: string }) {
   const [uploadState, setUploadState] = useState<{ done: number; total: number } | null>(null);
   const router = useRouter();
 
@@ -44,9 +44,9 @@ export function UploadFileButton({ className }: { className?: string }) {
       <input type="file" id="upload-button" hidden multiple onChange={handleChange} />
       <label
         htmlFor="upload-button"
-        className="px-6 py-3 flex items-center bg-blue-500 active:bg-blue-600 text-slate-100 cursor-pointer"
+        className="px-6 py-3 flex items-center justify-center bg-blue-500 active:bg-blue-600 text-slate-100 cursor-pointer"
       >
-        Upload
+        Upload file
       </label>
     </div>
   );

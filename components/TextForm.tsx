@@ -1,11 +1,10 @@
 "use client";
 
 import { Button } from "@/components/Button";
-import { Row } from "@/components/Row";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
-export function TextForm({ className }: { className?: string }) {
+export function TextForm() {
   const router = useRouter();
   const textareaRef = useRef<HTMLTextAreaElement>();
   const textareaOriginalHeight = useRef(0);
@@ -39,15 +38,18 @@ export function TextForm({ className }: { className?: string }) {
   };
 
   return (
-    <Row className={className}>
+    <>
       <textarea
         // @ts-expect-error ref type is valid
         ref={textareaRef}
-        className="min-h-8 text-black"
+        placeholder="Enter text"
+        className="text-center w-full min-h-8 text-black"
         value={newText}
         onChange={(e) => setNewText(e.target.value)}
       />
-      <Button className="self-center" onClick={submitText}>Send</Button>
-    </Row>
+      <Button className="w-full self-center" onClick={submitText}>
+        Upload text
+      </Button>
+    </>
   );
 }

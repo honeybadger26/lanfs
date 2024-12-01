@@ -3,7 +3,12 @@
 import { Button } from './Button';
 import { useRouter } from 'next/navigation';
 
-export function DeleteAllButton({ type }: { type: 'text' | 'files' }) {
+type DeleteAllButtonProps = {
+  className?: string;
+  type: 'text' | 'files';
+}
+
+export function DeleteAllButton({ className = "", type }: DeleteAllButtonProps) {
   const router = useRouter();
 
   async function handleClick() {
@@ -17,7 +22,7 @@ export function DeleteAllButton({ type }: { type: 'text' | 'files' }) {
   }
 
   return (
-    <Button color="red" onClick={handleClick}>
+    <Button className={className} color="red" onClick={handleClick}>
       Delete all
     </Button>
   );

@@ -1,20 +1,17 @@
-import { Button } from "@/components/Button";
-import { Row } from "@/components/Row";
-import Link from 'next/link';
+import { FilesSection } from '@/components/FilesSection';
+import { TextForm } from '@/components/TextForm';
+import { TextSection } from '@/components/TextSection';
+import { UploadFileButton } from '@/components/UploadFileButton';
 
 export default function Home() {
   return (
-    <Row className="pt-4">
-      <Link href="/text">
-        <Button icon={{ src: "/text.svg", alt: "Lines of text", size: 'large' }}>
-          Text
-        </Button>
-      </Link>
-      <Link href="/files">
-        <Button icon={{ src: "/file.svg", alt: "A computer file", size: 'large' }}>
-          Files
-        </Button>
-      </Link>
-    </Row>
+    <div className="w-full px-4 flex flex-col items-center">
+      <div className="w-full">
+        <TextForm className="pt-4" />
+        <UploadFileButton className="pt-4" />
+      </div>
+      <TextSection className="mt-6" />
+      <FilesSection className="mt-6" />
+    </div>
   );
 }
