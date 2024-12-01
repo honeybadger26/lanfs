@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from 'react';
 import { Button } from './Button';
+import Image from 'next/image';
 
 export function UploadFileButton({ className = "" }: { className?: string }) {
   const [uploadState, setUploadState] = useState<{ done: number; total: number } | null>(null);
@@ -33,10 +34,10 @@ export function UploadFileButton({ className = "" }: { className?: string }) {
 
   if (uploadState) {
     return (
-      <Button disabled>
+      <div className="w-full text-center text-slate-500">
         {`Uploading: ${uploadState.done + 1}/${uploadState.total}`}
-      </Button>
-    )
+      </div>
+    );
   }
 
   return (
@@ -46,7 +47,15 @@ export function UploadFileButton({ className = "" }: { className?: string }) {
         htmlFor="upload-button"
         className="px-6 py-3 flex items-center justify-center bg-blue-500 active:bg-blue-600 text-slate-100 cursor-pointer"
       >
-        Upload file
+        <Image
+          className="min-h-8 min-w-8"
+          color="#fff"
+          src="/upload.svg"
+          alt="Upload symbol"
+          width="32"
+          height="32"
+        />
+        {/* Upload file */}
       </label>
     </div>
   );

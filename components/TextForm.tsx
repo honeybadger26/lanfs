@@ -3,8 +3,9 @@
 import { Button } from "@/components/Button";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { Cell } from './Cell';
 
-export function TextForm() {
+export function TextForm({ hasFiles }: { hasFiles: boolean }) {
   const router = useRouter();
   const textareaRef = useRef<HTMLTextAreaElement>();
   const textareaOriginalHeight = useRef(0);
@@ -38,18 +39,23 @@ export function TextForm() {
   };
 
   return (
-    <>
-      <textarea
-        // @ts-expect-error ref type is valid
-        ref={textareaRef}
-        placeholder="Enter text"
-        className="text-center w-full min-h-8 text-black"
-        value={newText}
-        onChange={(e) => setNewText(e.target.value)}
-      />
-      <Button className="w-full self-center" onClick={submitText}>
-        Upload text
-      </Button>
-    </>
+    <tr>
+      <Cell className="w-full" colSpan={hasFiles ? 2 : undefined}>
+        <textarea
+          // @ts-expect-error ref type is valid
+          ref={textareaRef}
+          placeholder="Enter text"
+          className="w-full min-h-8 text-black"
+          value={newText}
+          onChange={(e) => setNewText(e.target.value)}
+        />
+      </Cell>
+      <Cell>
+        <Button
+          icon={{ src: "/upload.svg", alt: "Upload symbol", size: 'normal' }}
+          onClick={submitText}
+        />
+      </Cell>
+    </tr>
   );
 }

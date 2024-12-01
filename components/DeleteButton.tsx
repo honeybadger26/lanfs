@@ -5,17 +5,26 @@ import { useRouter } from 'next/navigation';
 
 type DeleteButtonProps = {
   type: 'file' | 'text';
-  id: string;
+  all?: boolean;
+  id?: string;
 };
 
-export function DeleteButton({ type, id }: DeleteButtonProps) {
+export function DeleteButton({ type, all = false, id }: DeleteButtonProps) {
   const router = useRouter();
 
   async function handleClick() {
     if (type === 'file') {
-      await fetch(`/api/files/${id}`, { method: "DELETE" });
+      if (all) {
+        await fetch(`/api/files`, { method: "DELETE" });
+      } else {
+        await fetch(`/api/files/${id}`, { method: "DELETE" });
+      }
     } else {
-      await fetch(`/api/text/${id}`, { method: "DELETE" });
+      if (all) {
+        await fetch(`/api/text`, { method: "DELETE" });
+      } else {
+        await fetch(`/api/text/${id}`, { method: "DELETE" });
+      }
     }
 
     router.refresh();
