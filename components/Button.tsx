@@ -11,13 +11,13 @@ type ButtonProps = {
   className?: string;
   color?: 'blue' | 'red';
   children?: ReactNode;
-  icon?: { src: string; alt: string; size: 'normal' | 'large' };
+  icon?: { src: string; alt: string };
   disabled?: boolean;
   onClick?: () => void;
 };
 
 export function Button({
-  padding = "px-6 py-3",
+  padding = "px-4 py-2",
   className = "",
   color = 'blue',
   children,
@@ -30,20 +30,20 @@ export function Button({
   return (
     <button
       disabled={disabled}
-      className={`${padding} flex flex-col items-center gap-1 text-slate-100 disabled:text-slate-300 disabled:cursor-not-allowed ${colorClasses} ${className}`}
+      className={`${padding} flex justify-center items-center gap-2 text-slate-100 disabled:text-slate-300 disabled:cursor-not-allowed ${colorClasses} ${className}`}
       onClick={onClick}
     >
       {icon && (
         <Image
-          className="min-h-8 min-w-8"
+          className="min-h-6 min-w-6"
           color="#fff"
           src={icon.src}
           alt={icon.alt}
-          width={icon.size === 'large' ? "64" : "32"}
-          height={icon.size === 'large' ? "64" : "32"}
+          width="24"
+          height="24"
         />
       )}
-      <div>{children}</div>
+      {children && <div>{children}</div>}
     </button>
   );
 }

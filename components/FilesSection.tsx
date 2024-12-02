@@ -1,10 +1,7 @@
-import { Button } from "@/components/Button";
 import { DeleteButton } from '@/components/DeleteButton';
 import { DownloadFileButton } from '@/components/DownloadFileButton';
-import { Row } from '@/components/Row';
 import { UploadFileButton } from '@/components/UploadFileButton';
 import fs from 'fs';
-import Link from 'next/link';
 import { Cell } from './Cell';
 
 export function FilesSection({ className = "" }: { className?: string }) {
@@ -52,5 +49,3 @@ export function FilesSection({ className = "" }: { className?: string }) {
     </table>
   );
 }
-
-export const dynamic = "force-dynamic";

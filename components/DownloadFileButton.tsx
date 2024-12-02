@@ -6,7 +6,7 @@ export function DownloadFileButton({ fileName }: { fileName: string }) {
   return (
     <a href={`/api/files/${fileName}`} download>
       <Button
-        icon={{ src: "/download.svg", alt: "Download symbol", size: 'normal' }}
+        icon={{ src: "/download.svg", alt: "Download symbol" }}
       />
     </a>
   );

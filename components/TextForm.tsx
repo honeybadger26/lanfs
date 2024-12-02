@@ -2,32 +2,15 @@
 
 import { Button } from "@/components/Button";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import { Cell } from './Cell';
 
 export function TextForm({ hasFiles }: { hasFiles: boolean }) {
   const router = useRouter();
   const textareaRef = useRef<HTMLTextAreaElement>();
-  const textareaOriginalHeight = useRef(0);
   const [newText, setNewText] = useState("");
 
-  useEffect(() => {
-    if (textareaRef.current) {
-      if (textareaOriginalHeight.current === 0) {
-        textareaOriginalHeight.current = textareaRef.current.clientHeight;
-      }
-
-      const scrollHeight = textareaRef.current.scrollHeight;
-
-      if (scrollHeight > textareaOriginalHeight.current) {
-        textareaRef.current.style.height = "0px";
-        const newScrollHeight = textareaRef.current.scrollHeight;
-        textareaRef.current.style.height = `${newScrollHeight}px`;
-      }
-    }
-  }, [newText]);
-
-  const submitText = async () => {
+  async function submitText() {
     await fetch("/api/text", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -36,7 +19,15 @@ export function TextForm({ hasFiles }: { hasFiles: boolean }) {
 
     setNewText("");
     router.refresh();
-  };
+  }
+
+  function handleTextChange(event: ChangeEvent<HTMLTextAreaElement>) {
+    setNewText(event.target.value);
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "0px";
+      textareaRef.current.style.height = textareaRef.current.scrollHeight + "px";
+    }
+  }
 
   return (
     <tr>
@@ -47,12 +38,12 @@ export function TextForm({ hasFiles }: { hasFiles: boolean }) {
           placeholder="Enter text"
           className="w-full min-h-8 text-black"
           value={newText}
-          onChange={(e) => setNewText(e.target.value)}
+          onChange={handleTextChange}
         />
       </Cell>
       <Cell>
         <Button
-          icon={{ src: "/upload.svg", alt: "Upload symbol", size: 'normal' }}
+          icon={{ src: "/upload.svg", alt: "Upload symbol" }}
           onClick={submitText}
         />
       </Cell>

@@ -33,7 +33,7 @@ export function DeleteButton({ type, all = false, id }: DeleteButtonProps) {
   return (
     <Button
       color="red"
-      icon={{ src: "/bin.svg", alt: "Trash bin", size: 'normal' }}
+      icon={{ src: "/bin.svg", alt: "Trash bin" }}
       onClick={handleClick}
     />
   );

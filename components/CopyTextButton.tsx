@@ -9,7 +9,7 @@ export function CopyTextButton({ text }: { text: string }) {
 
   return (
     <Button
-      icon={{ src: "/copy.svg", alt: "Copy documents", size: 'normal' }}
+      icon={{ src: "/copy.svg", alt: "Copy documents" }}
       onClick={handleClick}
     />
   );

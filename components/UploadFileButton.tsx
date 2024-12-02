@@ -1,16 +1,14 @@
 "use client";
 
+import Image from 'next/image';
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from 'react';
-import { Button } from './Button';
-import Image from 'next/image';
 
 export function UploadFileButton({ className = "" }: { className?: string }) {
   const [uploadState, setUploadState] = useState<{ done: number; total: number } | null>(null);
   const router = useRouter();
 
   async function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    // TODO: Loading state
     const selectedFiles = e.target.files;
 
     if (!selectedFiles) {
@@ -48,14 +46,13 @@ export function UploadFileButton({ className = "" }: { className?: string }) {
         className="px-6 py-3 flex items-center justify-center bg-blue-500 active:bg-blue-600 text-slate-100 cursor-pointer"
       >
         <Image
-          className="min-h-8 min-w-8"
+          className="min-h-4 min-w-4"
           color="#fff"
           src="/upload.svg"
           alt="Upload symbol"
-          width="32"
-          height="32"
+          width="24"
+          height="24"
         />
-        {/* Upload file */}
       </label>
     </div>
   );
