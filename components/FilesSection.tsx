@@ -1,5 +1,4 @@
 import { DeleteButton } from "@/components/DeleteButton";
-import { DownloadFileButton } from "@/components/DownloadFileButton";
 import { UploadFileButton } from "@/components/UploadFileButton";
 import fs from "fs";
 import { Cell } from "./Cell";
@@ -12,7 +11,7 @@ export function FilesSection({ className = "" }: { className?: string }) {
     <table className={`w-full md:w-fit ${className}`}>
       <thead>
         <tr>
-          <Cell colSpan={2} className="text-center text-3xl font-semibold">
+          <Cell className="text-center text-3xl font-semibold">
             Files
           </Cell>
           {hasFiles && (
@@ -27,10 +26,9 @@ export function FilesSection({ className = "" }: { className?: string }) {
           files.map((fileName) => (
             <tr key={fileName}>
               <Cell className="max-w-0 md:max-w-full w-full whitespace-pre-line overflow-auto">
-                {fileName}
-              </Cell>
-              <Cell>
-                <DownloadFileButton fileName={fileName} />
+                <a className="underline" href={`/api/files/${fileName}`} download>
+                  {fileName}
+                </a>
               </Cell>
               <Cell>
                 <DeleteButton type="file" id={fileName} />
@@ -38,7 +36,7 @@ export function FilesSection({ className = "" }: { className?: string }) {
             </tr>
           ))}
         <tr>
-          <Cell colSpan={3}>
+          <Cell colSpan={2}>
             <UploadFileButton />
           </Cell>
         </tr>
