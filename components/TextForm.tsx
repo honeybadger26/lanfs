@@ -3,7 +3,7 @@
 import { Button } from "@/components/Button";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useRef, useState } from "react";
-import { Cell } from './Cell';
+import { Cell } from "./Cell";
 
 export function TextForm({ hasFiles }: { hasFiles: boolean }) {
   const router = useRouter();
@@ -25,7 +25,8 @@ export function TextForm({ hasFiles }: { hasFiles: boolean }) {
     setNewText(event.target.value);
     if (textareaRef.current) {
       textareaRef.current.style.height = "0px";
-      textareaRef.current.style.height = textareaRef.current.scrollHeight + "px";
+      textareaRef.current.style.height =
+        textareaRef.current.scrollHeight + "px";
     }
   }
 

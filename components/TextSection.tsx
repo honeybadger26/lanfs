@@ -1,8 +1,8 @@
-import { CopyTextButton } from '@/components/CopyTextButton';
-import { DeleteButton } from '@/components/DeleteButton';
-import fs from 'fs';
-import { Cell } from './Cell';
-import { TextForm } from './TextForm';
+import { CopyTextButton } from "@/components/CopyTextButton";
+import { DeleteButton } from "@/components/DeleteButton";
+import fs from "fs";
+import { Cell } from "./Cell";
+import { TextForm } from "./TextForm";
 
 export function TextSection({ className = "" }: { className?: string }) {
   // TODO: Think about using websockets to refresh?
@@ -11,14 +11,13 @@ export function TextSection({ className = "" }: { className?: string }) {
 
   const fileContents = fileNames.map((fileName) => {
     // Adding an empty string will convert Buffer to string
-    const contents = '' + fs.readFileSync(`./tmp/text/${fileName}`);
+    const contents = "" + fs.readFileSync(`./tmp/text/${fileName}`);
     return {
       id: fileName,
       isLink: /^(https?:\/\/[^\s]+)$/.test(contents),
       contents: contents,
     };
   });
-
 
   return (
     <table className={`w-full md:w-fit ${className}`}>
@@ -35,13 +34,17 @@ export function TextSection({ className = "" }: { className?: string }) {
         </tr>
       </thead>
       <tbody>
-        {hasFiles && (
+        {hasFiles &&
           fileContents.map(({ id, isLink, contents }) => (
             <tr key={id}>
               <Cell className="w-full whitespace-pre-line overflow-auto">
                 {isLink ? (
-                  <a className="underline" href={contents}>{contents}</a>
-                ) : contents}
+                  <a className="underline" href={contents}>
+                    {contents}
+                  </a>
+                ) : (
+                  contents
+                )}
               </Cell>
               <Cell>
                 <CopyTextButton text={contents} />
@@ -50,8 +53,7 @@ export function TextSection({ className = "" }: { className?: string }) {
                 <DeleteButton type="text" id={id} />
               </Cell>
             </tr>
-          ))
-        )}
+          ))}
         <TextForm hasFiles={hasFiles} />
       </tbody>
     </table>

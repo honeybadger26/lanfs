@@ -1,9 +1,9 @@
-import fs from 'fs';
-import mime from 'mime';
+import fs from "fs";
+import mime from "mime";
 
 export async function GET(
   _: Request,
-  { params }: { params: Promise<{ filename: string }> }
+  { params }: { params: Promise<{ filename: string }> },
 ) {
   const fileName = (await params).filename;
   const contentType = mime.getType(fileName);
@@ -22,7 +22,7 @@ export async function GET(
 
 export async function DELETE(
   _: Request,
-  { params }: { params: Promise<{ filename: string }> }
+  { params }: { params: Promise<{ filename: string }> },
 ) {
   const fileName = (await params).filename;
   fs.rmSync(`./tmp/files/${fileName}`);

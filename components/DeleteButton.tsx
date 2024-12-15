@@ -1,10 +1,10 @@
 "use client";
 
-import { Button } from './Button';
-import { useRouter } from 'next/navigation';
+import { Button } from "./Button";
+import { useRouter } from "next/navigation";
 
 type DeleteButtonProps = {
-  type: 'file' | 'text';
+  type: "file" | "text";
   all?: boolean;
   id?: string;
 };
@@ -13,7 +13,7 @@ export function DeleteButton({ type, all = false, id }: DeleteButtonProps) {
   const router = useRouter();
 
   async function handleClick() {
-    if (type === 'file') {
+    if (type === "file") {
       if (all) {
         await fetch(`/api/files`, { method: "DELETE" });
       } else {

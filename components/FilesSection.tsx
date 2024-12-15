@@ -1,8 +1,8 @@
-import { DeleteButton } from '@/components/DeleteButton';
-import { DownloadFileButton } from '@/components/DownloadFileButton';
-import { UploadFileButton } from '@/components/UploadFileButton';
-import fs from 'fs';
-import { Cell } from './Cell';
+import { DeleteButton } from "@/components/DeleteButton";
+import { DownloadFileButton } from "@/components/DownloadFileButton";
+import { UploadFileButton } from "@/components/UploadFileButton";
+import fs from "fs";
+import { Cell } from "./Cell";
 
 export function FilesSection({ className = "" }: { className?: string }) {
   const files = fs.readdirSync("./tmp/files/");
@@ -23,12 +23,10 @@ export function FilesSection({ className = "" }: { className?: string }) {
         </tr>
       </thead>
       <tbody>
-        {hasFiles && (
+        {hasFiles &&
           files.map((fileName) => (
             <tr key={fileName}>
-              <Cell
-                className="max-w-0 md:max-w-full w-full whitespace-pre-line overflow-auto"
-              >
+              <Cell className="max-w-0 md:max-w-full w-full whitespace-pre-line overflow-auto">
                 {fileName}
               </Cell>
               <Cell>
@@ -38,8 +36,7 @@ export function FilesSection({ className = "" }: { className?: string }) {
                 <DeleteButton type="file" id={fileName} />
               </Cell>
             </tr>
-          ))
-        )}
+          ))}
         <tr>
           <Cell colSpan={3}>
             <UploadFileButton />

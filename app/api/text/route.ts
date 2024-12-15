@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from "fs";
 
 export async function POST(request: Request) {
   const body = await request.json();
@@ -14,7 +14,7 @@ export async function DELETE() {
 
   files.forEach((fileName) => {
     fs.rmSync(`./tmp/text/${fileName}`);
-  })
+  });
 
   return new Response();
 }

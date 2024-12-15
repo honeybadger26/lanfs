@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from "next/image";
 import { ReactNode } from "react";
 
 const COLOR_CLASSES = {
@@ -9,7 +9,7 @@ const COLOR_CLASSES = {
 type ButtonProps = {
   padding?: string;
   className?: string;
-  color?: 'blue' | 'red';
+  color?: "blue" | "red";
   children?: ReactNode;
   icon?: { src: string; alt: string };
   disabled?: boolean;
@@ -19,7 +19,7 @@ type ButtonProps = {
 export function Button({
   padding = "px-4 py-2",
   className = "",
-  color = 'blue',
+  color = "blue",
   children,
   icon,
   disabled = false,
