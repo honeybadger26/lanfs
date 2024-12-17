@@ -20,42 +20,39 @@ export function TextSection({ className = "" }: { className?: string }) {
   });
 
   return (
-    <table className={`w-full md:w-fit ${className}`}>
-      <thead>
-        <tr>
-          <Cell colSpan={2} className="text-center text-3xl font-semibold">
-            Text
-          </Cell>
-          {hasFiles && (
-            <Cell>
-              <DeleteButton type="text" all />
-            </Cell>
-          )}
-        </tr>
-      </thead>
-      <tbody>
-        {hasFiles &&
-          fileContents.map(({ id, isLink, contents }) => (
-            <tr key={id}>
-              <Cell className="w-full whitespace-pre-line overflow-auto">
-                {isLink ? (
-                  <a className="underline" href={contents}>
-                    {contents}
-                  </a>
-                ) : (
-                  contents
-                )}
-              </Cell>
-              <Cell>
-                <CopyTextButton text={contents} />
-              </Cell>
-              <Cell>
-                <DeleteButton type="text" id={id} />
-              </Cell>
-            </tr>
-          ))}
-        <TextForm hasFiles={hasFiles} />
-      </tbody>
-    </table>
+    <div className={`w-full flex flex-col items-center ${className}`}>
+      <h2 className="text-3xl">Text</h2>
+      {hasFiles && (
+        <table className="mt-4 w-full md:w-fit">
+          <tbody>
+            {fileContents.map(({ id, isLink, contents }) => (
+              <tr key={id}>
+                <Cell className="w-full whitespace-pre-line overflow-auto">
+                  {isLink ? (
+                    <a className="underline" href={contents}>
+                      {contents}
+                    </a>
+                  ) : (
+                    contents
+                  )}
+                </Cell>
+                <Cell>
+                  <CopyTextButton text={contents} />
+                </Cell>
+                <Cell>
+                  <DeleteButton type="text" id={id} />
+                </Cell>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+      <div className="pt-4 flex gap-2">
+        <TextForm />
+        {hasFiles && (
+          <DeleteButton type="text" all />
+        )}
+      </div>
+    </div>
   );
 }

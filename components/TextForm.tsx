@@ -3,9 +3,10 @@
 import { Button } from "@/components/Button";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useRef, useState } from "react";
-import { Cell } from "./Cell";
 
-export function TextForm({ hasFiles }: { hasFiles: boolean }) {
+type TextFormProps = { className?: string };
+
+export function TextForm({ className = "" }: TextFormProps) {
   const router = useRouter();
   const textareaRef = useRef<HTMLTextAreaElement>();
   const [newText, setNewText] = useState("");
@@ -31,23 +32,19 @@ export function TextForm({ hasFiles }: { hasFiles: boolean }) {
   }
 
   return (
-    <tr>
-      <Cell className="w-full" colSpan={hasFiles ? 2 : undefined}>
-        <textarea
-          // @ts-expect-error ref type is valid
-          ref={textareaRef}
-          placeholder="Enter text"
-          className="w-full min-h-8 text-black"
-          value={newText}
-          onChange={handleTextChange}
-        />
-      </Cell>
-      <Cell>
-        <Button
-          icon={{ src: "/upload.svg", alt: "Upload symbol" }}
-          onClick={submitText}
-        />
-      </Cell>
-    </tr>
+    <div className={`flex ${className}`}>
+      <textarea
+        // @ts-expect-error ref type is valid
+        ref={textareaRef}
+        placeholder="Enter text"
+        className="w-full min-h-8 text-black"
+        value={newText}
+        onChange={handleTextChange}
+      />
+      <Button
+        icon={{ src: "/upload.svg", alt: "Upload symbol" }}
+        onClick={submitText}
+      />
+    </div>
   );
 }

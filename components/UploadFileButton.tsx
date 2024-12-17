@@ -54,7 +54,7 @@ export function UploadFileButton({ className = "" }: { className?: string }) {
       />
       <label
         htmlFor="upload-button"
-        className="px-6 py-3 flex items-center justify-center bg-blue-500 active:bg-blue-600 text-slate-100 cursor-pointer"
+        className="px-4 py-2 flex items-center justify-center bg-blue-500 active:bg-blue-600 text-slate-100 cursor-pointer"
       >
         <Image
           className="min-h-4 min-w-4"
