@@ -49,9 +49,7 @@ export function TextSection({ className = "" }: { className?: string }) {
       )}
       <div className="pt-4 flex gap-2">
         <TextForm />
-        {hasFiles && (
-          <DeleteButton type="text" all />
-        )}
+        {hasFiles && <DeleteButton type="text" all />}
       </div>
     </div>
   );

@@ -16,7 +16,11 @@ export function FilesSection({ className = "" }: { className?: string }) {
             {files.map((fileName) => (
               <tr key={fileName}>
                 <Cell className="max-w-0 md:max-w-full w-full whitespace-pre-line overflow-auto">
-                  <a className="underline" href={`/api/files/${fileName}`} download>
+                  <a
+                    className="underline"
+                    href={`/api/files/${fileName}`}
+                    download
+                  >
                     {fileName}
                   </a>
                 </Cell>
@@ -30,9 +34,7 @@ export function FilesSection({ className = "" }: { className?: string }) {
       )}
       <div className="pt-4 flex gap-2">
         <UploadFileButton />
-        {hasFiles && (
-          <DeleteButton type="file" all />
-        )}
+        {hasFiles && <DeleteButton type="file" all />}
       </div>
     </div>
   );
