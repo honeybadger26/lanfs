@@ -15,7 +15,7 @@ export function FilesSection({ className = "" }: { className?: string }) {
           <tbody>
             {files.map((fileName) => (
               <tr key={fileName}>
-                <Cell className="max-w-0 md:max-w-full w-full whitespace-pre-line overflow-auto">
+                <Cell className="w-full whitespace-pre-line overflow-auto">
                   <a
                     className="underline"
                     href={`/api/files/${fileName}`}

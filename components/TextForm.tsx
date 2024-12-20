@@ -2,13 +2,12 @@
 
 import { Button } from "@/components/Button";
 import { useRouter } from "next/navigation";
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 type TextFormProps = { className?: string };
 
 export function TextForm({ className = "" }: TextFormProps) {
   const router = useRouter();
-  const textareaRef = useRef<HTMLTextAreaElement>();
   const [newText, setNewText] = useState("");
 
   async function submitText() {
@@ -24,18 +23,11 @@ export function TextForm({ className = "" }: TextFormProps) {
 
   function handleTextChange(event: ChangeEvent<HTMLTextAreaElement>) {
     setNewText(event.target.value);
-    if (textareaRef.current) {
-      textareaRef.current.style.height = "0px";
-      textareaRef.current.style.height =
-        textareaRef.current.scrollHeight + "px";
-    }
   }
 
   return (
     <div className={`flex ${className}`}>
       <textarea
-        // @ts-expect-error ref type is valid
-        ref={textareaRef}
         placeholder="Enter text"
         className="w-full min-h-8 text-black"
         value={newText}
