@@ -4,32 +4,28 @@ A file and text transfer tool for use over your local network
 
 ## Getting started
 
-First, at the root of this project, create the directories that will store the
-files and text:
+At the root of this project create the directories that will store the files and
+text
 
 ```bash
-mkdir -p tmp/files
-mkdir tmp/text
+mkdir -p tmp/files tmp/text
 ```
 
-Then start the server using either the **Development** or **Production**
-instructions below. Once the server is started, go to: http://localhost:3000
-
-### Development
+Install dependencies
 
 ```bash
-npm install
-npm run dev
+bun install
 ```
 
-### Production
+Start the development server...
 
 ```bash
-npm install
-npm run build
-npm run start
+bun run dev --open
 ```
 
-## Notes
+...or the production build
 
-SVGs from https://www.svgrepo.com/
+```bash
+bun --bun run build
+bun ./build/index.js
+```
