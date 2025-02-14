@@ -29,3 +29,9 @@ bun run dev --open
 bun --bun run build
 bun ./build/index.js
 ```
+
+## To do
+
+- Sort text/files by upload date?
+- Wrap only link part of text in anchor tag
+- Refresh when change to dir detected (maybe using sockets?)

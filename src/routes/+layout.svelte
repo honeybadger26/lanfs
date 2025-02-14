@@ -12,4 +12,5 @@
 	<h1 class="text-4xl font-semibold">LANFS</h1>
 	<p class="text-sm">By Simon Schippl</p>
 </div>
+
 {@render children()}
