@@ -1,26 +1,24 @@
-import fs from 'node:fs';
+import { getDb } from '$lib/server/db.js';
 
-export function load({ depends }) {
+type TextList = {
+	id: number;
+	contents: string;
+	isLink: number;
+}[];
+
+type FileList = {
+	id: number;
+	name: string;
+	link: string;
+}[];
+
+export async function load({ depends }) {
 	depends('app:load-text-files');
 
-	const textFileNames = fs.readdirSync('./tmp/text/');
-	const texts = textFileNames.map((fileName) => {
-		// Adding an empty string will convert Buffer to string
-		const contents = '' + fs.readFileSync(`./tmp/text/${fileName}`);
-		return {
-			id: fileName,
-			isLink: /^(https?:\/\/[^\s]+)$/.test(contents),
-			contents
-		};
-	});
-
-	const fileNames = fs.readdirSync('./tmp/files/');
-	const files = fileNames.map((fileName) => {
-		return {
-			name: fileName,
-			link: `/api/files/${fileName}`
-		};
-	});
+	const db = await getDb();
+	const texts = db.query("SELECT * FROM text ORDER BY id ASC").all() as TextList;
+	const files = db.query("SELECT * FROM files ORDER BY id ASC").all() as FileList;
+	db.close();
 
 	return { texts, files };
 }

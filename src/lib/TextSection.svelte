@@ -3,7 +3,13 @@
 	import DeleteButton from './DeleteButton.svelte';
 	import TextForm from './TextForm.svelte';
 
-	type TextSectionProps = { texts: { id: string; isLink: boolean; contents: string }[] };
+	type TextSectionProps = {
+		texts: {
+			id: string;
+			isLink: boolean;
+			contents: string;
+		}[];
+	};
 
 	let { texts }: TextSectionProps = $props();
 	let hasTexts = $derived(texts.length > 0);
