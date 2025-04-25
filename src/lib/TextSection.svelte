@@ -5,7 +5,7 @@
 
 	type TextSectionProps = {
 		texts: {
-			id: string;
+			id: number;
 			contents: string;
 		}[];
 	};
@@ -30,7 +30,7 @@
 						{@html formatTextWithLinks(contents)}
 					</div>
 					<CopyTextButton text={contents} />
-					<DeleteButton type="text" {id} />
+					<DeleteButton type="text" id={id.toString()} />
 				</div>
 			{/each}
 		</div>

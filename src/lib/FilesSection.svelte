@@ -5,7 +5,7 @@
 	type FilesSectionProps = {
 		classes?: string;
 		files: {
-			id: string;
+			id: number;
 			name: string;
 			link: string;
 		}[];
@@ -26,7 +26,7 @@
 							{name}
 						</a>
 					</div>
-					<DeleteButton type="file" {id} />
+					<DeleteButton type="file" id={id.toString()} />
 				</div>
 			{/each}
 		</div>
