@@ -3,7 +3,6 @@ import { getDb } from '$lib/server/db.js';
 type TextList = {
 	id: number;
 	contents: string;
-	isLink: number;
 }[];
 
 type FileList = {

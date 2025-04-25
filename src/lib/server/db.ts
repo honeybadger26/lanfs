@@ -14,8 +14,7 @@ export async function getDb() {
       db.query(`
         CREATE TABLE text (
           id INTEGER PRIMARY KEY,
-          contents TEXT NOT NULL,
-          isLink INTEGER NOT NULL
+          contents TEXT NOT NULL
         );
       `).run();
       db.query(`

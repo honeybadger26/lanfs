@@ -8,7 +8,7 @@ At the root of this project create the directories that will store the files and
 text
 
 ```bash
-mkdir -p tmp/files tmp/text
+mkdir -p tmp/files
 ```
 
 Install dependencies
@@ -20,7 +20,7 @@ bun install
 Start the development server...
 
 ```bash
-bun run dev --open
+bun --bun run dev --open
 ```
 
 ...or the production build
@@ -32,6 +32,4 @@ bun ./build/index.js
 
 ## To do
 
-- Sort text/files by upload date?
-- Wrap only link part of text in anchor tag
 - Refresh when change to dir detected (maybe using sockets?)

@@ -7,11 +7,8 @@ export const POST: RequestHandler = async ({ request }) => {
 
 	const db = await getDb();
 	db
-		.prepare("INSERT INTO text (contents, isLink) VALUES ($contents, $isLink)")
-		.run({
-			$contents: contents,
-			$isLink: /^(https?:\/\/[^\s]+)$/.test(contents),
-		});
+		.prepare("INSERT INTO text (contents) VALUES ($contents)")
+		.run({ $contents: contents });
 	db.close();
 
 	return new Response();
