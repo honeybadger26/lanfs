@@ -4,13 +4,14 @@
 	import TextForm from './TextForm.svelte';
 
 	type TextSectionProps = {
+		classes?: string;
 		texts: {
 			id: number;
 			contents: string;
 		}[];
 	};
 
-	let { texts }: TextSectionProps = $props();
+	let { classes, texts }: TextSectionProps = $props();
 	let hasTexts = $derived(texts.length > 0);
 
 	function formatTextWithLinks(text: string): string {
@@ -20,7 +21,7 @@
 	}
 </script>
 
-<div class="w-full">
+<div class={`w-full ${classes}`}>
 	<h2 class="mx-auto w-fit text-3xl">Text</h2>
 	{#if hasTexts}
 		<div class="mt-4 flex w-full flex-col gap-1">
