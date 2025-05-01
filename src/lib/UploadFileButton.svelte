@@ -4,6 +4,7 @@
 
 	let numFilesUploaded: number | undefined = $state();
 	let numTotalFiles: number | undefined = $state();
+	let currentFileProgress: number = $state(0);
 
 	const onchange: ChangeEventHandler<HTMLInputElement> = async (event) => {
 		const { files } = event.currentTarget;
@@ -13,12 +14,30 @@
 		numTotalFiles = files.length;
 
 		for (const file of files) {
+			currentFileProgress = 0;
 			const formData = new FormData();
 			formData.append('file', file);
 
-			await fetch('/api/files', {
-				method: 'POST',
-				body: formData
+			await new Promise((resolve, reject) => {
+				const xhr = new XMLHttpRequest();
+				xhr.open('POST', '/api/files');
+
+				xhr.upload.addEventListener('progress', (e) => {
+					if (e.lengthComputable) {
+						currentFileProgress = e.loaded / e.total;
+					}
+				});
+
+				xhr.addEventListener('load', () => {
+					if (xhr.status >= 200 && xhr.status < 300) {
+						resolve(xhr.response);
+					} else {
+						reject(new Error(`Upload failed with status ${xhr.status}`));
+					}
+				});
+
+				xhr.addEventListener('error', () => reject(new Error('Upload failed')));
+				xhr.send(formData);
 			});
 
 			numFilesUploaded++;
@@ -26,6 +45,7 @@
 
 		numFilesUploaded = undefined;
 		numTotalFiles = undefined;
+		currentFileProgress = 0;
 		invalidate('app:load-text-files');
 	};
 </script>
@@ -46,7 +66,17 @@
 		/>
 	</label>
 {:else}
-	<div class="px-6 text-center text-slate-500">
-		Uploading: {numFilesUploaded + 1}/{numTotalFiles}
+	<div class="w-full px-6">
+		<div class="text-center text-xs text-slate-500">
+			Uploading file {numFilesUploaded + 1}/{numTotalFiles} ({Math.round(
+				currentFileProgress * 100
+			)}% done)
+		</div>
+		<div class="mt-2 h-2.5 w-full rounded-full bg-gray-200">
+			<div
+				class="h-2.5 rounded-full bg-green-500 transition-all duration-200"
+				style="width: {((currentFileProgress + numFilesUploaded) / numTotalFiles!) * 100}%"
+			></div>
+		</div>
 	</div>
 {/if}
