@@ -26,8 +26,7 @@ bun --bun run dev --open
 ...or the production build
 
 ```bash
-bun --bun run build
-bun ./build/index.js
+./scripts/build.sh
 ```
 
 ## To do
