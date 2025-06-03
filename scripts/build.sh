@@ -8,7 +8,3 @@ fi
 
 echo "Creating production build..."
 bun --bun run build
-
-clear
-echo "Starting server..."
-PORT=8889 bun ./build/index.js
